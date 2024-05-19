@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Green API</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+    crossorigin="anonymous" />
+</head>
+
+<body>
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-3 px-1">
+        <div class="p-1">
+          <form>
+            <input type="text" class="form-control mb-3"
+              placeholder="Введите idInstance" id="idInstance" />
+            <input type="text" class="form-control"
+              placeholder="Введите ApiTokenInstance" id="ApiTokenInstance" />
+          </form>
+        </div>
+        <div class="my-5 d-grid gap-2">
+          <button class="btn btn-primary w-100" type="button" onclick="getSettings()">
+            getSettings
+          </button>
+          <button class="btn btn-primary w-100" onclick="getStateInstance()"
+            type="button">
+            getStateInstance
+          </button>
+        </div>
+        <div class="mb-5">
+          <form>
+            <input type="text" class="form-control my-3" id="msgWid" />
+            <textarea class="form-control my-3" id="message" rows="3"></textarea>
+            <button class="btn btn-primary w-100" type="button" onclick="sendMessage()">sendMessage</button>
+          </form>
+        </div>
+        <div class="my-3">
+          <form>
+            <input type="text" class="form-control my-3" id="urlWid" />
+            <input type="text" class="form-control my-3" id="urlFile" />
+            <button class="btn btn-primary w-100" type="button" onclick="sendFileByURL()">
+              sendFileByURL
+            </button>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-9 px-5 d-flex flex-column">
+        <h3 class="align-self-start">Ответ:</h3>
+        <div class="my-3 align-self-stretch flex-fill border bg-light">
+          <pre><code id="responseField"> </code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+
+</html>
