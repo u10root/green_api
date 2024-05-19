@@ -5,21 +5,21 @@
 const getData = () => {
   const idInstance = document.getElementById("idInstance").value;
   const ApiTokenInstance = document.getElementById("ApiTokenInstance").value;
-  const msgWid = document.getElementById("msgWid").value;
+  const chatId = document.getElementById("chatId").value;
   const message = document.getElementById("message").value;
-  const urlWid = document.getElementById("urlWid").value;
   const urlFile = document.getElementById("urlFile").value;
-  return { idInstance: idInstance, ApiTokenInstance: ApiTokenInstance, urlWid: urlWid, msgWid: msgWid, urlFile: urlFile, message: message };
+  return { idInstance: idInstance, ApiTokenInstance: ApiTokenInstance, chatId: chatId, urlFile: urlFile, message: message };
 };
 
 const sendMessage = async () => {
-  const { idInstance, ApiTokenInstance, msgWid, message } = getData();
+  const { idInstance, ApiTokenInstance, chatId, message } = getData();
+  console.log(chatId)
   const url = `https://api.green-api.com/waInstance${idInstance}/sendMessage/${ApiTokenInstance}`;
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      chatId: msgWid,
+      chatId: chatId,
       message: message,
     }),
   };
@@ -28,14 +28,14 @@ const sendMessage = async () => {
 };
 
 const sendFileByURL = async () => {
-  const { idInstance, ApiTokenInstance, urlWid, urlFile } = getData();
+  const { idInstance, ApiTokenInstance, chatId, urlFile } = getData();
   const url = `https://api.green-api.com/waInstance${idInstance}/sendFileByUrl/${ApiTokenInstance}`;
   const fileName = url.substring(urlFile.lastIndexOf("/") + 1);
   const options = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      chatId: urlWid,
+      chatId: chatId,
       urlFile: urlFile,
       fileName: fileName,
     }),
@@ -46,16 +46,14 @@ const sendFileByURL = async () => {
 
 const getSettings = async () => {
   const { idInstance, ApiTokenInstance } = getData();
-  const msgWid = document.getElementById("msgWid");
-  const urlWid = document.getElementById("urlWid");
+  const chatId = document.getElementById("chatId");
   await fetch(
     `https://api.green-api.com/waInstance${idInstance}/getSettings/${ApiTokenInstance}`
   )
     .then((res) => res.json())
     .then((json) => {
       responseField.innerText = JSON.stringify(json, "", "\t");
-      msgWid.value = json.wid;
-      urlWid.value = json.wid;
+      chatId.value = json.wid;
     });
 };
 
