@@ -13,7 +13,6 @@ const getData = () => {
 
 const sendMessage = async () => {
   const { idInstance, ApiTokenInstance, chatId, message } = getData();
-  console.log(chatId)
   const url = `https://api.green-api.com/waInstance${idInstance}/sendMessage/${ApiTokenInstance}`;
   const options = {
     method: "POST",
